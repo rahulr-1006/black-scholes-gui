@@ -32,7 +32,8 @@ streamlit run app.py
 
 ## 📸 Screenshot
 
-![Screenshot](screenshot.png)
+<img width="1389" height="822" alt="image" src="https://github.com/user-attachments/assets/21be6a6a-21bd-4b97-9785-65ccdc6f8a57" />
+
 
 ---
 
