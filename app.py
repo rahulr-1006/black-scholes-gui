@@ -7,7 +7,7 @@ from bs_pricing import (
 )
 
 st.set_page_config(page_title="Black-Scholes Option Calculator", layout="centered")
-st.title("📈 Black-Scholes Option Pricing Tool")
+st.title("Black-Scholes Option Pricing Tool")
 
 # --- Inputs ---
 st.sidebar.header("Option Parameters")
@@ -21,13 +21,13 @@ sigma = st.sidebar.slider("Volatility (σ)", min_value=0.05, max_value=1.0, valu
 call_price = black_scholes_call(S, K, T, r, sigma)
 put_price = black_scholes_put(S, K, T, r, sigma)
 
-st.subheader("💰 Option Prices")
+st.subheader("Option Prices")
 st.write(f"**Call Option Price:** ${call_price:.2f}")
 st.write(f"**Put Option Price:** ${put_price:.2f}")
 st.caption("Based on Black-Scholes formula for European options.")
 
 # --- Greeks ---
-st.subheader("📊 Option Greeks")
+st.subheader("Option Greeks")
 
 col1, col2 = st.columns(2)
 
@@ -48,7 +48,7 @@ with col2:
 st.caption("Greeks measure sensitivities: Δ=price, Γ=curvature, ν=volatility, Θ=time decay")
 
 # --- Payoff Plot ---
-st.subheader("📉 Option Payoff at Expiration")
+st.subheader("Option Payoff at Expiration")
 
 option_type = st.radio("Select Option Type", ["Call", "Put"], horizontal=True)
 S_range = np.linspace(0.5 * K, 1.5 * K, 100)
@@ -68,7 +68,7 @@ ax.legend()
 st.pyplot(fig)
 
 # --- Volatility Sensitivity ---
-st.subheader("📈 Option Value vs. Volatility")
+st.subheader("Option Value vs. Volatility")
 
 vol_range = np.linspace(0.01, 1.0, 100)
 call_vals = [black_scholes_call(S, K, T, r, vol) for vol in vol_range]
@@ -84,7 +84,7 @@ ax2.legend()
 st.pyplot(fig2)
 
 # --- Time Sensitivity ---
-st.subheader("📆 Option Value vs. Time to Expiration")
+st.subheader("Option Value vs. Time to Expiration")
 
 T_range = np.linspace(0.01, 2.0, 100)
 call_T = [black_scholes_call(S, K, T_i, r, sigma) for T_i in T_range]
