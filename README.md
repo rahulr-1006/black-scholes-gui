@@ -50,18 +50,15 @@ $$
 
 **Greeks:**
 
-- **Delta (Call):** \( \Delta = N(d_1) \)
-- **Delta (Put):** \( \Delta = N(d_1) - 1 \)
-- **Gamma:** \( \Gamma = \frac{N'(d_1)}{S \cdot \sigma \sqrt{T}} \)
-- **Vega:** \( \nu = S \cdot N'(d_1) \cdot \sqrt{T} \)
+- **Delta (Call):** Delta = N(d₁)
+- **Delta (Put):** Delta = N(d₁) − 1
+- **Gamma:** Gamma = N′(d₁) / [S × σ × √T]
+- **Vega:** Vega = S × N′(d₁) × √T
 - **Theta (Call):** 
-  $$
-  \Theta = \frac{-S \cdot N'(d_1) \cdot \sigma}{2 \sqrt{T}} - rK e^{-rT} N(d_2)
-  $$
+  Theta = [−S × N′(d₁) × σ / (2√T)] − rK × e^(−rT) × N(d₂)
 - **Theta (Put):** 
-  $$
-  \Theta = \frac{-S \cdot N'(d_1) \cdot \sigma}{2 \sqrt{T}} + rK e^{-rT} N(-d_2)
-  $$
+  Theta = [−S × N′(d₁) × σ / (2√T)] + rK × e^(−rT) × N(−d₂)
+
 
 ---
 
