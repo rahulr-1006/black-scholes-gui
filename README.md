@@ -1,7 +1,7 @@
 ````markdown
 # 📈 Black-Scholes Option Pricing Tool
 
-An interactive Python web app that calculates and visualizes European option prices using the Black-Scholes model. Built with **Streamlit**, this tool lets users adjust inputs in real time and view live option pricing, payoff charts, and sensitivity plots.
+An interactive Python web app that calculates and visualizes European option prices using the Black-Scholes model. Built with **Streamlit**, this tool lets users adjust inputs in real time and view live option pricing, payoff charts, and sensitivity plots. This is an extremely basic options model, solely for tutorial purposes. Improvements with better graphs and more customizibility coming soon!
 
 ---
 
@@ -70,15 +70,3 @@ black-scholes-gui/
 MIT License. Built by [Rahul Rengan Ramakrishnan](https://github.com/rahulr-1006).
 
 ````
-
----
-
-Once you paste this in and commit it:
-
-```bash
-git add README.md
-git commit -m "Add README with features, usage, and formulas"
-git push origin main
-````
-
-Let me know when it's up — we’ll finalize your resume bullet with the live link.
