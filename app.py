@@ -1,5 +1,10 @@
 import streamlit as st
-from bs_pricing import black_scholes_call, black_scholes_put
+import numpy as np
+import matplotlib.pyplot as plt
+from bs_pricing import (
+    black_scholes_call, black_scholes_put,
+    delta_call, delta_put, gamma, vega, theta_call, theta_put
+)
 
 st.set_page_config(page_title="Black-Scholes Option Calculator", layout="centered")
 st.title("📈 Black-Scholes Option Pricing Tool")
@@ -12,29 +17,46 @@ T = st.sidebar.slider("Time to Expiration (T, in years)", min_value=0.01, max_va
 r = st.sidebar.slider("Risk-Free Rate (r)", min_value=0.0, max_value=0.10, value=0.05, step=0.001)
 sigma = st.sidebar.slider("Volatility (σ)", min_value=0.05, max_value=1.0, value=0.2, step=0.01)
 
-# --- Outputs ---
+# --- Prices ---
 call_price = black_scholes_call(S, K, T, r, sigma)
 put_price = black_scholes_put(S, K, T, r, sigma)
 
 st.subheader("💰 Option Prices")
 st.write(f"**Call Option Price:** ${call_price:.2f}")
 st.write(f"**Put Option Price:** ${put_price:.2f}")
-
 st.caption("Based on Black-Scholes formula for European options.")
 
-import numpy as np
-import matplotlib.pyplot as plt
+# --- Greeks ---
+st.subheader("📊 Option Greeks")
 
+col1, col2 = st.columns(2)
+
+with col1:
+    st.markdown("#### Call Option")
+    st.write(f"**Delta:** {delta_call(S, K, T, r, sigma):.4f}")
+    st.write(f"**Gamma:** {gamma(S, K, T, r, sigma):.4f}")
+    st.write(f"**Vega:** {vega(S, K, T, r, sigma):.4f}")
+    st.write(f"**Theta:** {theta_call(S, K, T, r, sigma):.4f}")
+
+with col2:
+    st.markdown("#### Put Option")
+    st.write(f"**Delta:** {delta_put(S, K, T, r, sigma):.4f}")
+    st.write(f"**Gamma:** {gamma(S, K, T, r, sigma):.4f}")
+    st.write(f"**Vega:** {vega(S, K, T, r, sigma):.4f}")
+    st.write(f"**Theta:** {theta_put(S, K, T, r, sigma):.4f}")
+
+st.caption("Greeks measure sensitivities: Δ=price, Γ=curvature, ν=volatility, Θ=time decay")
+
+# --- Payoff Plot ---
 st.subheader("📉 Option Payoff at Expiration")
 
 option_type = st.radio("Select Option Type", ["Call", "Put"], horizontal=True)
-
 S_range = np.linspace(0.5 * K, 1.5 * K, 100)
 
 if option_type == "Call":
-    payoff = np.maximum(S_range - K, 0) - black_scholes_call(S, K, T, r, sigma)
+    payoff = np.maximum(S_range - K, 0) - call_price
 else:
-    payoff = np.maximum(K - S_range, 0) - black_scholes_put(S, K, T, r, sigma)
+    payoff = np.maximum(K - S_range, 0) - put_price
 
 fig, ax = plt.subplots()
 ax.plot(S_range, payoff, label=f"{option_type} Payoff")
@@ -45,6 +67,7 @@ ax.set_title(f"{option_type} Option Payoff")
 ax.legend()
 st.pyplot(fig)
 
+# --- Volatility Sensitivity ---
 st.subheader("📈 Option Value vs. Volatility")
 
 vol_range = np.linspace(0.01, 1.0, 100)
@@ -60,6 +83,7 @@ ax2.set_title("Price Sensitivity to Volatility")
 ax2.legend()
 st.pyplot(fig2)
 
+# --- Time Sensitivity ---
 st.subheader("📆 Option Value vs. Time to Expiration")
 
 T_range = np.linspace(0.01, 2.0, 100)
