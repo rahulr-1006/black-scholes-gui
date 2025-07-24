@@ -1,29 +1,86 @@
-# 📈 Black-Scholes Option Pricing Tool
+---
 
-An interactive Python web app that calculates and visualizes European option prices using the Black-Scholes model. Built with **Streamlit**, this tool lets users adjust inputs in real time and view live option pricing, payoff charts, sensitivity plots, and the Greeks. This is an extremely basic options model, solely for tutorial purposes. Improvements with better graphs and more customizability coming soon!
+## 🧠 Implementation Details
+
+This app is built with clarity and education in mind. Below is a breakdown of what’s implemented and what each part contributes to the overall Black-Scholes pricing tool.
 
 ---
 
-## 🧮 Features
+### 📊 Real-Time Pricing with Sliders
 
-- 📊 **Live pricing** for European call and put options
-- 🎛️ Adjustable sliders for \( S, K, T, r, \sigma \)
-- 💰 Real-time output of call and put prices
-- 📉 Payoff diagram at expiration
-- 📈 Sensitivity plots for **volatility** and **time to expiration**
-- ⚙️ Computes core **Greeks** (Delta, Gamma, Vega, Theta)
-- 🧠 Educational tool for understanding option behavior
+The sidebar of the app provides intuitive sliders for core Black-Scholes parameters:
+
+| Parameter | Meaning |
+|----------|---------|
+| `S` | Spot price — current price of the underlying asset |
+| `K` | Strike price — the price agreed in the option contract |
+| `T` | Time to expiration (in years) |
+| `r` | Risk-free interest rate |
+| `σ` | Volatility — the expected fluctuation of the asset’s price |
+
+These values dynamically update the call and put prices every time they are changed, providing real-time output using:
+
+```python
+black_scholes_call(S, K, T, r, sigma)
+black_scholes_put(S, K, T, r, sigma)
+```
 
 ---
 
+### 📈 Visualizing Option Behavior
+
+The app includes three core visualizations:
+
+1. **Payoff Diagram**  
+   Shows how profit or loss changes depending on where the stock ends up at expiration.
+
+2. **Sensitivity to Volatility**  
+   Demonstrates how increasing or decreasing volatility affects the value of call and put options.
+
+3. **Sensitivity to Time to Expiration**  
+   Illustrates how time decay impacts option value, especially as expiration nears.
+
+Each chart is generated using `matplotlib` and rendered in Streamlit with `st.pyplot()`.
+
+---
+
+### ⚙️ Greek Calculations
+
+Greeks quantify how sensitive an option’s value is to different variables:
+
+| Greek | Description | Formula |
+|-------|-------------|---------|
+| **Delta (Call)** | Sensitivity to stock price | \( \Delta = N(d_1) \) |
+| **Delta (Put)** | Sensitivity to stock price | \( \Delta = N(d_1) - 1 \) |
+| **Gamma** | Sensitivity of Delta to stock price | \( \Gamma = \frac{N'(d_1)}{S \cdot \sigma \cdot \sqrt{T}} \) |
+| **Vega** | Sensitivity to volatility | \( \text{Vega} = S \cdot N'(d_1) \cdot \sqrt{T} \) |
+| **Theta (Call)** | Time decay | \( \Theta = \frac{-S \cdot N'(d_1) \cdot \sigma}{2\sqrt{T}} - rK e^{-rT} N(d_2) \) |
+| **Theta (Put)** | Time decay | \( \Theta = \frac{-S \cdot N'(d_1) \cdot \sigma}{2\sqrt{T}} + rK e^{-rT} N(-d_2) \) |
+
+These are computed in `bs_pricing.py` using NumPy and SciPy for normal distribution evaluations.
+
+---
+
+### 🧪 Educational Use Case
+
+This app is designed as a **learning sandbox** for:
+
+- Finance students trying to understand option pricing
+- Interview prep for quant/dev roles
+- Visual intuition for how Black-Scholes works
+- Exploring how the Greeks behave near-the-money or close to expiration
+
+  
 ## 🚀 Getting Started
 
 ### 1. Install dependencies:
+
 ```bash
 pip install -r requirements.txt
 ```
 
 ### 2. Run the app:
+
 ```bash
 streamlit run app.py
 ```
@@ -32,34 +89,23 @@ streamlit run app.py
 
 ## 📸 Screenshot
 
-<img width="1389" height="822" alt="image" src="https://github.com/user-attachments/assets/21be6a6a-21bd-4b97-9785-65ccdc6f8a57" />
-
+<img width="1389" height="822" alt="App Screenshot" src="https://github.com/user-attachments/assets/21be6a6a-21bd-4b97-9785-65ccdc6f8a57" />
 
 ---
 
 ## 📘 Formulae
 
 **Call Option Price:**
+
 $$
 C = S \cdot N(d_1) - K \cdot e^{-rT} \cdot N(d_2)
 $$
 
 **Put Option Price:**
+
 $$
 P = K \cdot e^{-rT} \cdot N(-d_2) - S \cdot N(-d_1)
 $$
-
-**Greeks:**
-
-- **Delta (Call):** Delta = N(d₁)
-- **Delta (Put):** Delta = N(d₁) − 1
-- **Gamma:** Gamma = N′(d₁) / [S × σ × √T]
-- **Vega:** Vega = S × N′(d₁) × √T
-- **Theta (Call):** 
-  Theta = [−S × N′(d₁) × σ / (2√T)] − rK × e^(−rT) × N(d₂)
-- **Theta (Put):** 
-  Theta = [−S × N′(d₁) × σ / (2√T)] + rK × e^(−rT) × N(−d₂)
-
 
 ---
 
@@ -67,9 +113,9 @@ $$
 
 ```
 black-scholes-gui/
-├── app.py             # Streamlit GUI
-├── bs_pricing.py      # Pricing logic (d1, d2, call, put, Greeks)
-├── requirements.txt   # Required Python packages
+├── app.py             # Streamlit GUI logic
+├── bs_pricing.py      # Pricing logic for d1, d2, call/put, and Greeks
+├── requirements.txt   # Python dependencies
 ├── README.md          # This file
 ```
 
@@ -78,3 +124,16 @@ black-scholes-gui/
 ## 📎 License
 
 MIT License. Built by [Rahul Rengan Ramakrishnan](https://github.com/rahulr-1006).
+
+```
+
+---
+
+Let me know if you want to add:
+
+- A “📌 TODO” section for future improvements
+- A deployment section (Heroku / HuggingFace / Streamlit Cloud)
+- Or a math appendix with derivations and assumptions
+
+Would you like to add a roadmap or keep it simple for now?
+```
