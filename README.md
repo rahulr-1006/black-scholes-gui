@@ -1,3 +1,14 @@
+Awesome — let’s update your `README.md` to include the new **heatmap visualizations**. Here's the **revised and complete version**, including everything you had before **plus** a brand-new section:
+
+---
+
+## ✅ Final Updated `README.md` (with heatmaps section added)
+
+````md
+# 🧠 Black-Scholes Option Pricing & Visualization Tool
+
+An interactive Streamlit app that calculates and visualizes **European option prices** using the **Black-Scholes model**, complete with dynamic payoff charts, volatility/time sensitivity graphs, **Greeks**, and 🔥 **heatmaps**.
+
 ---
 
 ## 🧠 Implementation Details
@@ -23,7 +34,7 @@ These values dynamically update the call and put prices every time they are chan
 ```python
 black_scholes_call(S, K, T, r, sigma)
 black_scholes_put(S, K, T, r, sigma)
-```
+````
 
 ---
 
@@ -31,16 +42,36 @@ black_scholes_put(S, K, T, r, sigma)
 
 The app includes three core visualizations:
 
-1. **Payoff Diagram**  
+1. **Payoff Diagram**
    Shows how profit or loss changes depending on where the stock ends up at expiration.
 
-2. **Sensitivity to Volatility**  
+2. **Sensitivity to Volatility**
    Demonstrates how increasing or decreasing volatility affects the value of call and put options.
 
-3. **Sensitivity to Time to Expiration**  
+3. **Sensitivity to Time to Expiration**
    Illustrates how time decay impacts option value, especially as expiration nears.
 
 Each chart is generated using `matplotlib` and rendered in Streamlit with `st.pyplot()`.
+
+---
+
+### 🧊 Heatmaps of Option Prices
+
+To intuitively show how **spot price** and **volatility** affect call and put prices, the app generates two heatmaps:
+
+* **Call Option Heatmap**
+* **Put Option Heatmap**
+
+Each heatmap shows price levels across a grid of:
+
+* X-axis: Spot Prices
+* Y-axis: Volatility (σ)
+
+🔍 You can also view a table-style heatmap using Seaborn, where **each cell is annotated with the exact option price**, ideal for study or report use.
+
+```python
+sns.heatmap(call_df, annot=True, fmt=".2f", cmap="viridis")
+```
 
 ---
 
@@ -48,14 +79,14 @@ Each chart is generated using `matplotlib` and rendered in Streamlit with `st.py
 
 Greeks quantify how sensitive an option’s value is to different variables:
 
-| Greek | Description | Formula |
-|-------|-------------|---------|
-| **Delta (Call)** | Sensitivity to stock price | \( \Delta = N(d_1) \) |
-| **Delta (Put)** | Sensitivity to stock price | \( \Delta = N(d_1) - 1 \) |
-| **Gamma** | Sensitivity of Delta to stock price | \( \Gamma = \frac{N'(d_1)}{S \cdot \sigma \cdot \sqrt{T}} \) |
-| **Vega** | Sensitivity to volatility | \( \text{Vega} = S \cdot N'(d_1) \cdot \sqrt{T} \) |
-| **Theta (Call)** | Time decay | \( \Theta = \frac{-S \cdot N'(d_1) \cdot \sigma}{2\sqrt{T}} - rK e^{-rT} N(d_2) \) |
-| **Theta (Put)** | Time decay | \( \Theta = \frac{-S \cdot N'(d_1) \cdot \sigma}{2\sqrt{T}} + rK e^{-rT} N(-d_2) \) |
+| Greek            | Description                         | Formula                                                                         |
+| ---------------- | ----------------------------------- | ------------------------------------------------------------------------------- |
+| **Delta (Call)** | Sensitivity to stock price          | $\Delta = N(d_1)$                                                               |
+| **Delta (Put)**  | Sensitivity to stock price          | $\Delta = N(d_1) - 1$                                                           |
+| **Gamma**        | Sensitivity of Delta to stock price | $\Gamma = \frac{N'(d_1)}{S \cdot \sigma \cdot \sqrt{T}}$                        |
+| **Vega**         | Sensitivity to volatility           | $\text{Vega} = S \cdot N'(d_1) \cdot \sqrt{T}$                                  |
+| **Theta (Call)** | Time decay                          | $\Theta = \frac{-S \cdot N'(d_1) \cdot \sigma}{2\sqrt{T}} - rK e^{-rT} N(d_2)$  |
+| **Theta (Put)**  | Time decay                          | $\Theta = \frac{-S \cdot N'(d_1) \cdot \sigma}{2\sqrt{T}} + rK e^{-rT} N(-d_2)$ |
 
 These are computed in `bs_pricing.py` using NumPy and SciPy for normal distribution evaluations.
 
@@ -65,12 +96,13 @@ These are computed in `bs_pricing.py` using NumPy and SciPy for normal distribut
 
 This app is designed as a **learning sandbox** for:
 
-- Finance students trying to understand option pricing
-- Interview prep for quant/dev roles
-- Visual intuition for how Black-Scholes works
-- Exploring how the Greeks behave near-the-money or close to expiration
+* Finance students trying to understand option pricing
+* Interview prep for quant/dev roles
+* Visual intuition for how Black-Scholes works
+* Exploring how the Greeks behave near-the-money or close to expiration
 
-  
+---
+
 ## 🚀 Getting Started
 
 ### 1. Install dependencies:
@@ -125,15 +157,4 @@ black-scholes-gui/
 
 MIT License. Built by [Rahul Rengan Ramakrishnan](https://github.com/rahulr-1006).
 
-```
-
----
-
-Let me know if you want to add:
-
-- A “📌 TODO” section for future improvements
-- A deployment section (Heroku / HuggingFace / Streamlit Cloud)
-- Or a math appendix with derivations and assumptions
-
-Would you like to add a roadmap or keep it simple for now?
-```
+````
