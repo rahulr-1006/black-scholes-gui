@@ -1,16 +1,16 @@
-# 🧠 Black-Scholes Option Pricing & Visualization Tool
+# Black-Scholes Option Pricing & Visualization Tool
 
-An interactive Streamlit app that calculates and visualizes **European option prices** using the **Black-Scholes model**, complete with dynamic payoff charts, volatility/time sensitivity graphs, **Greeks**, and 🔥 **heatmaps**.
+An interactive Streamlit app that calculates and visualizes **European option prices** using the **Black-Scholes model**, complete with dynamic payoff charts, volatility/time sensitivity graphs, **Greeks**, and **heatmaps**.
 
 ---
 
-## 🧠 Implementation Details
+## Implementation Details
 
 This app is built with clarity and education in mind. Below is a breakdown of what’s implemented and what each part contributes to the overall Black-Scholes pricing tool.
 
 ---
 
-### 📊 Real-Time Pricing with Sliders
+### Real-Time Pricing with Sliders
 
 The sidebar of the app provides intuitive sliders for core Black-Scholes parameters:
 
@@ -31,7 +31,7 @@ black_scholes_put(S, K, T, r, sigma)
 
 ---
 
-### 📈 Visualizing Option Behavior
+### Visualizing Option Behavior
 
 The app includes three core visualizations:
 
@@ -48,7 +48,7 @@ Each chart is generated using `matplotlib` and rendered in Streamlit with `st.py
 
 ---
 
-### 🧊 Heatmaps of Option Prices
+### Heatmaps of Option Prices
 
 To intuitively show how **spot price** and **volatility** affect call and put prices, the app generates two heatmaps:
 
@@ -68,7 +68,7 @@ sns.heatmap(call_df, annot=True, fmt=".2f", cmap="viridis")
 
 ---
 
-### ⚙️ Greek Calculations
+### Greek Calculations
 
 Greeks quantify how sensitive an option’s value is to different variables:
 
@@ -85,7 +85,7 @@ These are computed in `bs_pricing.py` using NumPy and SciPy for normal distribut
 
 ---
 
-### 🧪 Educational Use Case
+### Educational Use Case
 
 This app is designed as a **learning sandbox** for:
 
@@ -96,7 +96,7 @@ This app is designed as a **learning sandbox** for:
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### 1. Install dependencies:
 
@@ -118,7 +118,7 @@ streamlit run app.py
 
 ---
 
-## 📘 Formulae
+## Formulae
 
 **Call Option Price:**
 
@@ -134,7 +134,7 @@ $$
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 black-scholes-gui/
@@ -146,6 +146,6 @@ black-scholes-gui/
 
 ---
 
-## 📎 License
+## License
 
 MIT License. Built by [Rahul Rengan Ramakrishnan](https://github.com/rahulr-1006).
