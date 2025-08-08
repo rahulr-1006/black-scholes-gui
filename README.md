@@ -1,4 +1,4 @@
-# Black-Scholes Option Pricing & Visualization Tool
+A# Black-Scholes Option Pricing & Visualization Tool
 
 An interactive Streamlit app that calculates and visualizes **European option prices** using the **Black-Scholes model**, complete with dynamic payoff charts, volatility/time sensitivity graphs, **Greeks**, and **heatmaps**.
 
